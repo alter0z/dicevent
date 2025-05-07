@@ -1,0 +1,47 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Dicevent" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/material_blue</item>
+        <item name="colorPrimaryVariant">@color/material_blue</item>
+        <item name="colorOnPrimary">@color/light_dark</item>
+        <item name="bg">@color/dark</item>
+        <item name="boldText">@color/white_bold_text</item>
+        <item name="regularText">@color/white_regular_text</item>
+        <item name="appbar">@color/dark</item>
+        <item name="card">@color/light_dark</item>
+        <item name="appbarAttribute">@color/material_blue</item>
+        <item name="hintText">@color/hint_dark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/material_blue</item>
+        <item name="colorSecondaryVariant">@color/material_blue</item>
+        <item name="colorOnSecondary">@color/material_blue</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >@color/dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.Dicevent.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">?attr/boldText</item>
+    </style>
+
+    <style name="CollapsedAppBar" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">?attr/boldText</item>
+        <item name="android:fontFamily">@font/sf_sbold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Theme.Dicevent.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Dicevent.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+  <!-- Base application theme. -->
+    <style name="Base.Theme.Dicevent" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+</resources>
