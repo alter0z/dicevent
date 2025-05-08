@@ -87,6 +87,7 @@ dependencies {
 
     implementation(libs.glide)
 
+    implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
