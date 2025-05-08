@@ -55,6 +55,15 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion("1.9.10")
+            because("Force all Kotlin dependencies to use the same version")
+        }
+    }
+}
+
 dependencies {
     // Hilt for Dependency Injection
     implementation(libs.hilt.android)
@@ -64,8 +73,9 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     // room
-    implementation(libs.androidx.room.runtime.android)
-    implementation(libs.androidx.room.common.jvm)
+//    implementation(libs.androidx.room.runtime.android)
+    implementation(libs.androidx.room.runtime)
+//    implementation(libs.androidx.room.common.jvm)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
