@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.ansorisan.dicevent.R
+import com.ansorisan.dicevent.base.presentation.viewmodel.SettingViewModel
 import com.ansorisan.dicevent.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,12 +19,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel.getThemeSettings().observe(this) { isDarkModeActive ->
+            AppCompatDelegate.setDefaultNightMode(
+                if (isDarkModeActive) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
+        }
 
 //        setSupportActionBar(binding.toolbar)
 

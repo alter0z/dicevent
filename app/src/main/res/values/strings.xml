@@ -151,4 +151,6 @@
     <string name="favorite">Favorite</string>
     <string name="your_favorite_event">Your favorite event</string>
     <string name="oops_you_don_t_have_favorite_event_for_now">Oops, you don\'t have favorite event for now</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting">Setting</string>
 </resources>

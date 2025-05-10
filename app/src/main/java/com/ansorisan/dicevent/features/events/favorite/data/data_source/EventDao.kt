@@ -13,8 +13,8 @@ interface EventDao {
     @Query("SELECT * FROM events")
     suspend fun getAll(): List<Event>
 
-//    @Query("SELECT * FROM events WHERE id = :id")
-//    suspend fun getById(id: Int): Event?
+    @Query("SELECT * FROM events WHERE id = :id")
+    suspend fun getById(id: Int): Event?
 
     @Insert
     suspend fun insert(note: Event)

@@ -28,4 +28,10 @@
         android:name="com.ansorisan.dicevent.features.events.favorite.presentation.ui.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.ansorisan.dicevent.features.settings.presentation.SettingFragment"
+        android:label="@string/setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

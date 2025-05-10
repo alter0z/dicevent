@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.ansorisan.dicevent.base.data.models.UiState
 import com.ansorisan.dicevent.features.events.favorite.domain.entity.Event
 import com.ansorisan.dicevent.features.events.favorite.domain.usecase.DeleteEventsUseCase
+import com.ansorisan.dicevent.features.events.favorite.domain.usecase.GetEventByIdUseCase
 import com.ansorisan.dicevent.features.events.favorite.domain.usecase.GetFavoriteEventsUseCase
 import com.ansorisan.dicevent.features.events.favorite.domain.usecase.InsertEventsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class FavoriteEventViewModel @Inject constructor(
     private val getFavoriteEventsUseCase: GetFavoriteEventsUseCase,
     private val insertEventsUseCase: InsertEventsUseCase,
+    private val getEventByIdUseCase: GetEventByIdUseCase,
     private val deleteEventsUseCase: DeleteEventsUseCase,
 ) : ViewModel() {
     private val _eventsState = MutableStateFlow<UiState<List<Event>>>(UiState.Loading)
@@ -24,6 +26,9 @@ class FavoriteEventViewModel @Inject constructor(
 
     private val _eventState = MutableStateFlow<UiState<String>>(UiState.Loading)
     val eventState: StateFlow<UiState<String>> get() = _eventState
+
+    private val _eventDataState = MutableStateFlow<UiState<Event?>>(UiState.Loading)
+    val eventDataState: StateFlow<UiState<Event?>> get() = _eventDataState
 
     fun fetchFavoriteEvents() {
         viewModelScope.launch {
@@ -45,6 +50,18 @@ class FavoriteEventViewModel @Inject constructor(
                 _eventState.value = UiState.Success("Add to favorite successfully")
             } catch (e: Exception) {
                 _eventState.value = UiState.Error(e.toString())
+            }
+        }
+    }
+
+    fun getEventById(id: Int) {
+        viewModelScope.launch {
+            _eventDataState.value = UiState.Loading
+            try {
+                val response = getEventByIdUseCase(id)
+                _eventDataState.value = UiState.Success(response)
+            } catch (e: Exception) {
+                _eventDataState.value = UiState.Error(e.toString())
             }
         }
     }

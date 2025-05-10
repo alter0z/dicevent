@@ -1,6 +1,9 @@
 package com.ansorisan.dicevent.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
 import androidx.room.Room
 import com.ansorisan.dicevent.BuildConfig
 import com.ansorisan.dicevent.base.data.api.ApiService
@@ -8,6 +11,8 @@ import com.ansorisan.dicevent.base.data.repositories.EventRepositoryImpl
 import com.ansorisan.dicevent.features.events.favorite.data.repository.EventRepositoryImpl as FavEventRepoImpl
 import com.ansorisan.dicevent.base.db.EventDatabase
 import com.ansorisan.dicevent.base.domain.repositories.Event
+import com.ansorisan.dicevent.base.utils.theme.SettingPreferences
+import com.ansorisan.dicevent.base.utils.theme.dataStore
 import com.ansorisan.dicevent.features.events.favorite.data.data_source.EventDao
 import com.ansorisan.dicevent.features.events.favorite.domain.repository.Event as FavEventRepo
 import dagger.Module
@@ -70,4 +75,17 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNoteRepository(dao: EventDao): FavEventRepo = FavEventRepoImpl(dao)
+
+    // preferences
+    @Provides
+    @Singleton
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return context.dataStore
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingPreferences(dataStore: DataStore<Preferences>): SettingPreferences {
+        return SettingPreferences(dataStore)
+    }
 }

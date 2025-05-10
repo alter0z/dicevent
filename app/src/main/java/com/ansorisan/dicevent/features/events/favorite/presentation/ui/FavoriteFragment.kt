@@ -1,11 +1,13 @@
 package com.ansorisan.dicevent.features.events.favorite.presentation.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
@@ -29,6 +31,12 @@ class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding
     private val viewModel: FavoriteEventViewModel by viewModels()
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.fetchFavoriteEvents()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +66,7 @@ class FavoriteFragment : Fragment() {
                     is UiState.Success -> {
                         adapter.setFavData(state.data)
                         binding?.favorite?.adapter = adapter
+                        binding?.empty?.visibility = if (state.data.isEmpty()) View.VISIBLE else View.GONE
                     }
                 }
             }
@@ -65,9 +74,13 @@ class FavoriteFragment : Fragment() {
 
         adapter.setOnEventClickListener(object: OnEventClickListener {
             override fun onEventClick(eventId: Int) {
-                startActivity(
-                    Intent(activity, DetailEventActivity::class.java)
-                        .putExtra("ID", eventId))
+//                startActivity(
+//                    Intent(activity, DetailEventActivity::class.java)
+//                        .putExtra("ID", eventId))
+
+                val intent = Intent(activity, DetailEventActivity::class.java)
+                    .putExtra("ID", eventId)
+                launcher.launch(intent)
             }
         })
     }

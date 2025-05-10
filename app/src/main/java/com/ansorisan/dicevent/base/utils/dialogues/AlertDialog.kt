@@ -9,13 +9,13 @@ class AlertDialog(activity: AppCompatActivity) {
         builder = MaterialAlertDialogBuilder(activity)
     }
 
-//    fun successAlert(message: String) {
-//        builder?.setTitle("Success!")
-//        builder?.setMessage(message)
-//        builder?.setNeutralButton("Close") { _, _ -> }
-//        val dialog = builder?.create()
-//        dialog?.show()
-//    }
+    fun successAlert(message: String) {
+        builder?.setTitle("Success!")
+        builder?.setMessage(message)
+        builder?.setNeutralButton("Close") { _, _ -> }
+        val dialog = builder?.create()
+        dialog?.show()
+    }
 
     fun warningAlert(message: String) {
         builder?.setTitle("Warning!")

@@ -50,19 +50,19 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    ksp {
-        arg("room.schemaLocation", "$projectDir/schemas")
-    }
+//    ksp {
+//        arg("room.schemaLocation", "$projectDir/schemas")
+//    }
 }
 
-configurations.all {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "org.jetbrains.kotlin") {
-            useVersion("1.9.10")
-            because("Force all Kotlin dependencies to use the same version")
-        }
-    }
-}
+//configurations.all {
+//    resolutionStrategy.eachDependency {
+//        if (requested.group == "org.jetbrains.kotlin") {
+//            useVersion("1.9.10")
+//            because("Force all Kotlin dependencies to use the same version")
+//        }
+//    }
+//}
 
 dependencies {
     // Hilt for Dependency Injection
@@ -96,6 +96,9 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     implementation(libs.glide)
+
+    // data store
+    implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)

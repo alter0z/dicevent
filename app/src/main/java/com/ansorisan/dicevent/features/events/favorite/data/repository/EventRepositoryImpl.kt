@@ -12,8 +12,8 @@ class EventRepositoryImpl @Inject constructor(private val dao: EventDao) : Repo 
     override suspend fun getAllEvents(): List<Event> =
         dao.getAll().map { it.toEntity() }
 
-//    override suspend fun getNoteById(id: Int): Note? =
-//        dao.getById(id)?.toDomain()
+    override suspend fun getEventById(id: Int): Event? =
+        dao.getById(id)?.toEntity()
 
     override suspend fun insertEvent(event: Event) =
         dao.insert(event.toModel())
